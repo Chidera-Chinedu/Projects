@@ -1,0 +1,8 @@
+name = input("What is your name")
+name = name.strip()
+name = name.capitalize()
+print(f"hello, {name}")
+age = input("How old are you?")
+age = age.strip()
+print(f"You are {age} years old.")
+print(f"Did you know that you will be {int(age) + 10} in 10 years time?")
