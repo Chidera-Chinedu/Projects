@@ -8,8 +8,20 @@ def load_tasks():
     if not FILE.exists():
         return []
 
-    with FILE.open("r") as file:
-        return json.load(file)
+    try:
+        with FILE.open("r") as file:
+            tasks = json.load(file)
+
+        if not isinstance(tasks, list):
+            print("Error: Your tasks file has an invalid format.")
+            return None
+
+        return tasks
+
+    except json.JSONDecodeError:
+        print("Error: Your tasks file is damaged.")
+        print("Restore a valid backup before continuing.")
+        return None
 
 
 def save_tasks(tasks):
@@ -18,6 +30,14 @@ def save_tasks(tasks):
 
 
 tasks = load_tasks()
+
+if tasks is None:
+    print("Please fix or restore tasks.json, then run the app again.")
+    raise SystemExit
+
+if tasks is None:
+    print("The application cannot continue.")
+    raise SystemExit
 
 while True:
     print("\n1. Add task")
